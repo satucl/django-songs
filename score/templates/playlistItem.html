@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+<h1>Playlist: {{playlist.title}}</h1>
+
+<form action="{% url 'playlistItem' playlistId=playlist.id %}" method="post">
+{% csrf_token %} 
+
+
+{% for song in playlist.songs.all  %}
+<div>{{song.title}} 
+    
+    <button formnovalidate name="delete" value="{{ song.id }}">delete</button>
+
+</div> 
+
+</form>
+{% endfor %} 
+
+
+
+{% endblock %}

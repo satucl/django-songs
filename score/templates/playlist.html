@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+<h1>Playlists</h1>
+
+<form action="{% url 'playlist' %}" method="post">
+{% csrf_token %}
+<h3>create new</h3>
+title 
+<input type="text" id="title" name="title">
+<button name="save" value="save" class="btn btn-info">save</button>
+
+
+<h3>existing</h3>
+{% for playlist in playlists %}
+<div>
+    <a href="{% url 'playlistItem' playlistId=playlist.id %}">
+    {{playlist.title}} </a>
+    
+    <button formnovalidate name="delete" value="{{ playlist.id }}">delete</button>
+
+</div> 
+
+</form>
+{% endfor %} 
+
+
+
+{% endblock %}

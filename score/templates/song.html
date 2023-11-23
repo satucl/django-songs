@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+
+  <li>{{message}}</li>
+
+  {% endfor %}
+
+</ul>
+{% endif %}
+ 
+<h1>Song list</h1>
+
+<form action="{% url 'song' %}" method="post">
+{% csrf_token %}
+{% for song in songs %}
+<div>
+  {{song.title}}
+
+  
+  <select name="playlistId" id="playlistId">
+    {% for playlist in playlists %}
+
+    
+    <option value="{{ playlist.id}}" name="optionPlaylistId">{{ playlist.title }}</option>
+    
+    
+    {% endfor %} 
+  </select>
+
+  <button value="{{song.id}}" name="add">add to playlist</button>
+
+</div>
+</form>
+{% endfor %} 
+
+{% endblock %}
